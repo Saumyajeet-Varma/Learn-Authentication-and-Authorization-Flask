@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+<!-- Block title -->
+{% block title %} Login {% endblock %}
+
+<!-- Block content -->
+{% block content %}
+
+<!-- MAIN -->
+<h1 class="text-3xl font-semibold mb-5 text-white">LOGIN ACCOUNT</h1>
+<form
+  action="/login"
+  method="POST"
+  class="w-1/4 p-5 flex flex-col space-y-4 border-2 border-orange-500 rounded-lg"
+>
+  <!-- Flash message -->
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %}
+  <div class="mb-4 space-y-2">
+    {% for category, message in messages %}
+    <div
+      class="px-4 py-3 rounded-md text-white {% if category == 'success' %}bg-green-500{% elif category == 'error' %}bg-red-500{% else %}bg-orange-500{% endif %}"
+    >
+      {{ message }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %} {% endwith %}
+
+  <!-- FORM ELs -->
+  <input
+    type="email"
+    placeholder="Email"
+    name="email"
+    class="py-2 px-3 w-full border-2 border-orange-500 rounded-md bg-zinc-700 focus:border-orange-500 focus:outline-none"
+  />
+  <input
+    type="password"
+    placeholder="Password"
+    name="password"
+    class="py-2 px-3 w-full border-2 border-orange-500 rounded-md bg-zinc-700 focus:border-orange-500 focus:outline-none"
+  />
+  <div class="flex gap-4 items-center">
+    <input
+      type="checkbox"
+      name="remember"
+      class="h-4 w-4 accent-orange-500 border-2 border-orange-500 rounded focus:ring-white focus:outline-none"
+      id="remember"
+    />
+    <label for="remember">Remember me</label>
+  </div>
+  <input
+    type="submit"
+    value="LOGIN"
+    class="p-2 text-center bg-orange-500 text-white font-semibold rounded-md hover:bg-orange-400"
+  />
+</form>
+{% endblock %}

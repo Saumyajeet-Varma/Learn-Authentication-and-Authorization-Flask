@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <header
+      class="px-10 p-5 bg-zinc-800 text-white font-semibold flex justify-between items-center"
+    >
+      <div class="flex gap-2 items-center">
+        <img
+          src="https://img.icons8.com/?size=100&id=37960&format=png&color=EA580C"
+          alt="logo"
+          class="h-8"
+        />
+        <p class="text-xl font-bold text-orange-500">AUTH</p>
+      </div>
+      <nav>
+        <ul class="flex gap-7">
+          <li><a href="/" class="hover:text-orange-500">HOME</a></li>
+          <!-- Not Authenticated -->
+          {% if not current_user.is_authenticated %}
+          <li><a href="/login" class="hover:text-orange-500">LOGIN</a></li>
+          <li><a href="/signup" class="hover:text-orange-500">SIGNUP</a></li>
+          {% endif %}
+          <!-- Authenticated -->
+          {% if current_user.is_authenticated %}
+          <li><a href="/profile" class="hover:text-orange-500">PROFILE</a></li>
+          <li><a href="/logout" class="hover:text-orange-500">LOGOUT</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+    <main
+      class="flex-grow bg-zinc-900 text-white flex flex-col justify-center items-center"
+    >
+      {% block content %} {% endblock %}
+    </main>
+    <footer class="px-10 p-5 bg-zinc-800 font-semibold text-center text-white">
+      Flask Authentication by <span class="text-orange-500">SV</span>
+    </footer>
+  </body>
+</html>
